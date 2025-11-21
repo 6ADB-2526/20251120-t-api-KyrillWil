@@ -35,6 +35,8 @@ const addKind = (req, res)=>{
 
 //4
 
+
+
 module.exports = {
     alleInfo,
     getOne,

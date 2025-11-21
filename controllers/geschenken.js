@@ -13,6 +13,7 @@
 // connecteer de datagegevens aan de controller
 const { sinterklaasGeschenken: geschenken } = require("../databank/data");
 
+//1.
 const lijstGeschenken = (req, res) => {
   res.json(geschenken);
 };
@@ -22,15 +23,28 @@ const geschenkInfo = (req, res) => {
 };
 
 const geschenkToevoegen = (req, res) => {
-  const newGeschenk = {
-    id: 15,
-    naam: "KarelKleintjes-tshirt",
-    categorie: "textiel",
-    prijs: 20.5,
-  };
-  geschenken.push(newGeschenk);
-  res.json(newGeschenk);
+  // const newGeschenk = {
+  //     id: 15,
+  //     naam: "KarelKleintjes-tshirt",
+  //     categorie: "textiel",
+  //     prijs: 20.5,
+  //   };
+
+  const naam = req.body.naam
+  const categorie = req.body.categorie
+  const prijs  = req.body.prijs
+  const newGeschenk = {id: id, naam: naam, categorie: categorie, prijs: prijs}
+  geschenken.push(newGeschenk)
+  res.json({resultaat: "gelukt"})
 };
+
+const getMaxID = ()=>{
+  let maxID = 0
+  geschenken.forEach(geschenk =>{
+    if (maxID < geschenk.id) maxID = geschenk.id
+  })
+  return maxID
+}
 
 const geschenkWissen = (req, res) => {
   const geschenkToDel = geschenken.find(
